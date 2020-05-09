@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -13,7 +14,15 @@ if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
 }
 
+// need to require models
+
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/budget", {
+    useNewUrlParser: true,
+    useFindAndModify: false
+});
+
 // Define API routes here
+app.use(require("./routes"));
 
 // Send every other request to the React app
 // Define any API routes before this runs
