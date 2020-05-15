@@ -22,6 +22,9 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/budget", {
 });
 
 // Define API routes here
+// This is creating a middleware that is using the routes folder
+// Any requests that come are going to have to pass through the routes folder
+// When we require the entire folder, then node looks for an index in that folder
 app.use(require("./routes"));
 
 // Send every other request to the React app

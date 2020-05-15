@@ -17,3 +17,41 @@
 //       link: "http://books.google.com/books?id=sazytgAACAAJ&dq=title:The+Hunger+Games&hl=&source=gbs_api"
 //       title: "The Hunger Games"
 //     }
+
+
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
+// May want to make authors plural, but that will have a chain effect
+// Author may be an array of strings, so changed that by putting String in brackets
+
+const bookSchema = new Schema({
+    title: {
+        type: String,
+        required: true
+    },
+    author: {
+        type: [String],
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    image: {
+        type: String,
+        required: true
+    },
+    link: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+const Book = mongoose.model("Book", bookSchema);
+
+module.exports = Book;
